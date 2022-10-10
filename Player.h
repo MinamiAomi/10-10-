@@ -2,6 +2,7 @@
 #include "GameObject.h"
 #include "MyMath.h"
 #include <vector>
+#include "PlayerCollider.h"
 
 class Player : 
 	public GameObject {
@@ -21,6 +22,8 @@ public:
 		float mHeight;
 
 		std::vector<Vector2D> mOriginalPoint;
+
+		unsigned int color;
 	};
 
 private:
@@ -40,6 +43,7 @@ private:
 private:
 
 	Data mData;
+	PlayerCollider mCollider;
 
 
 public:
@@ -49,6 +53,12 @@ public:
 	void Create();
 	void Update();
 	void Draw();
+
+	void Collision(bool i);
+
+
+	const Vector2D& position() { return mData.mPosition; }
+	const float angle() { return (-mData.mStemDirection.Normal()).Angle(); }
 
 private:
 	void Input();

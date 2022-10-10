@@ -4,6 +4,7 @@
 #include <Novice.h>
 #include "Line.h"
 #include "Curve.h"
+#include "Collision.h"
 
 Normal::Normal(Game* game) :
 	Scene(game)
@@ -21,6 +22,7 @@ void Normal::Init() {
 
 void Normal::Update(){
 	game()->player()->Update();
+	game()->collision()->Proc();
 }
 
 void Normal::Draw(){
@@ -28,6 +30,7 @@ void Normal::Draw(){
 	game()->line()->Draw();
 	//game()->curve()->Draw();
 	game()->player()->Draw();
+	game()->collision()->Debug();
 }
 
 void Normal::NextScene(){}

@@ -18,9 +18,14 @@ public:
 	void SetCenter(const Vector2D& cen, float w, float h, float angle);
 
 
-	const Vector2D& LeftTop() const { return mLeftBottom; }
+	const Vector2D& LeftTop() const { return mLeftTop; }
 	const Vector2D& RightTop() const { return mRightTop; }
 	const Vector2D& LeftBottom() const { return mLeftBottom; }
 	const Vector2D& RightBottom() const { return mRightBottom; }
+
+	virtual QuadCollider getQuad() { return *this; }
+
+	static bool QuadToQuad(const QuadCollider& q1, const QuadCollider& q2);
+
 };
 

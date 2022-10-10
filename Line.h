@@ -1,6 +1,7 @@
 #pragma once
 #include "GameObject.h"
 #include "MyMath.h"
+#include "LineCollider.h"
 
 class Line :
     public GameObject
@@ -16,6 +17,7 @@ public:
 
 private:
     Data mData;
+    LineCollider mCollider;
 
 public:
     Line(class Game* game);

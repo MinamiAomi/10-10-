@@ -52,6 +52,11 @@ private:
 public:
 	class Curve* curve() { return mCurve; }
 
+
+private:
+	class Collision* mCollision;
+public:
+	class Collision* collision() { return mCollision; }
 public:
 	Game();
 	~Game();

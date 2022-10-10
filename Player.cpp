@@ -5,7 +5,8 @@
 #include "Screen.h"
 
 Player::Player(Game* game) :
-	GameObject(game)
+	GameObject(game),
+	mCollider(this)
 {}
 
 Player::~Player() {
@@ -25,6 +26,8 @@ void Player::Create() {
 
 	float width = 5;
 
+	mData.color = WHITE;
+
 	mData.mOriginalPoint = {
 		{ -mData.mWidth / 2.0f,mData.mHeight },
 		{ mData.mWidth / 2.0f, mData.mHeight },
@@ -38,6 +41,7 @@ void Player::Create() {
 
 		{ 0,mData.mHeight - width},
 	};
+	mCollider.Set({ -mData.mWidth / 2.0f,mData.mHeight }, { mData.mWidth / 2.0f, mData.mHeight }, { -mData.mWidth / 2.0f,0 }, { mData.mWidth / 2.0f, 0 });
 }
 
 void Player::Update() {
@@ -63,9 +67,19 @@ void Player::Draw() {
 		drawvec.emplace_back(mat * iter);
 	}
 
-	game()->screen()->DrawBox(drawvec[DPI_OutSideLeftTop], drawvec[DPI_OutSideRightTop], drawvec[DPI_OutSideLeftBottom], drawvec[DPI_OutSideRightBottom], 0xFFFFFFFF);
+	game()->screen()->DrawBox(drawvec[DPI_OutSideLeftTop], drawvec[DPI_OutSideRightTop], drawvec[DPI_OutSideLeftBottom], drawvec[DPI_OutSideRightBottom], mData.color);
 	game()->screen()->DrawBox(drawvec[DPI_InSideLeftTop], drawvec[DPI_InSideRightTop], drawvec[DPI_InSideLeftBottom], drawvec[DPI_InSideRightBottom], 0x000000FF);
-	game()->screen()->DrawTriangle(drawvec[DPI_InSideMidTop], drawvec[DPI_InSideLeftBottom], drawvec[DPI_InSideRightBottom], 0xFFFFFFFF);
+	game()->screen()->DrawTriangle(drawvec[DPI_InSideMidTop], drawvec[DPI_InSideLeftBottom], drawvec[DPI_InSideRightBottom], mData.color);
+}
+
+void Player::Collision(bool i) {
+	if (i) {
+		mData.color = RED;
+
+	}
+	else {
+		mData.color = WHITE;
+	}
 }
 
 void Player::Input() {

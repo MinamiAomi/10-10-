@@ -12,12 +12,15 @@ public:
     PlayerCollider(class Player* player);
     ~PlayerCollider();
 
+    class Player* player() { return mPlayer; }
+
+    QuadCollider getQuad();
 
 private:
     static std::list<PlayerCollider*> sList;
 
 public:
-    static const std::list<PlayerCollider*>& GroupPtr() { return sList; }
+    static std::list<PlayerCollider*>& GroupPtr() { return sList; }
 
 };
 

@@ -9,6 +9,7 @@
 #include "Player.h"
 #include "Line.h"
 #include "Curve.h"
+#include "Collision.h"
 
 Game::Game() {
 
@@ -23,9 +24,13 @@ Game::Game() {
 	mLine = new Line(this);
 
 	mCurve = new Curve(this);
+
+	mCollision = new Collision(this);
 }
 
 Game::~Game() {
+
+	delete mCollision;
 
 	delete mCurve;
 
